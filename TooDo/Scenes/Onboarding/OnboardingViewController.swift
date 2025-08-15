@@ -162,7 +162,8 @@ final class OnboardingViewController: UIViewController {
                 configure(with: pages[currentPage])
             }
         }
-    @objc private func getStartedTapped() {let homeVC = HomeController()
+    @objc private func getStartedTapped() {
+        let homeVC = HomePageViewController()
         let navigationController = UINavigationController(rootViewController: homeVC)
            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
            let sceneDelegate = windowScene.delegate as? SceneDelegate,
