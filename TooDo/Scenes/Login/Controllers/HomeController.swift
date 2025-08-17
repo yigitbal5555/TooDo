@@ -9,6 +9,37 @@
 import UIKit
 import SnapKit
 
+// Forward declarations to resolve compilation order issues
+protocol CustomTabBarViewDelegate: AnyObject {
+    func didTapTab(_ tab: TabType)
+    func didTapAddButton()
+}
+
+enum TabType: Int, CaseIterable {
+    case home = 0
+    case calendar = 1
+    case habits = 2
+    case reminders = 3
+    
+    var title: String {
+        switch self {
+        case .home: return "Home"
+        case .calendar: return "Calendar"
+        case .habits: return "Habits"
+        case .reminders: return "Reminders"
+        }
+    }
+    
+    var icon: UIImage? {
+        switch self {
+        case .home: return UIImage(systemName: "house.fill")
+        case .calendar: return UIImage(systemName: "calendar")
+        case .habits: return UIImage(systemName: "heart.fill")
+        case .reminders: return UIImage(systemName: "bell.fill")
+        }
+    }
+}
+
 enum HomeSection {
     case header
     case datePicker
