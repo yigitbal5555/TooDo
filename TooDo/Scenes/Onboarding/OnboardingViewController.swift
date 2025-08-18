@@ -163,9 +163,14 @@ final class OnboardingViewController: UIViewController {
             }
         }
     @objc private func getStartedTapped() {
-        let homeVC = HomePageViewController()
-        let navigationController = UINavigationController(rootViewController: homeVC)
-           if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+        // Onboarding tamamlandı olarak işaretle
+        OnboardingDefaults.markOnboardingSeen()
+        
+        // SignIn ekranına yönlendir
+        let signInVC = SignInController()
+        let navigationController = UINavigationController(rootViewController: signInVC)
+        
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
            let sceneDelegate = windowScene.delegate as? SceneDelegate,
            let window = sceneDelegate.window {
             window.rootViewController = navigationController

@@ -249,6 +249,20 @@ final class SignInController: UIViewController {
             make.width.equalTo(338)
             make.height.equalTo(45)
         }
+        
+        // Sign Up Button
+        let signUpButton = UIButton(type: .system)
+        signUpButton.setTitle("Don't have an account? Sign Up", for: .normal)
+        signUpButton.setTitleColor(.systemBlue, for: .normal)
+        signUpButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        signUpButton.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
+        
+        containerofStackView.addSubview(signUpButton)
+        signUpButton.snp.makeConstraints {
+            $0.top.equalTo(socialStack.snp.bottom).offset(20)
+            $0.centerX.equalToSuperview()
+            $0.height.equalTo(30)
+        }
     }
     
     @objc private func forgotPasswordTapped() {
@@ -258,5 +272,23 @@ final class SignInController: UIViewController {
 
     @objc private func signInButtonTapped() {
         print("Sign In button tapped")
+        // Ana sayfaya yönlendir
+        let homeVC = HomePageViewController()
+        let navigationController = UINavigationController(rootViewController: homeVC)
+        
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let sceneDelegate = windowScene.delegate as? SceneDelegate,
+           let window = sceneDelegate.window {
+            window.rootViewController = navigationController
+            UIView.transition(with: window,
+                              duration: 0.4,
+                              options: .transitionFlipFromRight,
+                              animations: nil)
+        }
+    }
+    
+    @objc private func signUpButtonTapped() {
+        let signUpVC = SignUpViewController()
+        navigationController?.pushViewController(signUpVC, animated: true)
     }
 }
